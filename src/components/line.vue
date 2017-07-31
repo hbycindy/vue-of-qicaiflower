@@ -6,28 +6,30 @@
     </div>
     <div class="searchlist" v-show="hide">
       <ul>
-        <li>粉玫瑰</li>
-        <li>19枝</li>
-        <li>百合</li>
-        <li>玫瑰</li>
-        <li>关闭</li>
+        <li><router-link to="/pinkrose">粉玫瑰</router-link></li>
+        <li><router-link to="/nineteen">19枝</router-link></li>
+        <li><router-link to="/baihe">百合</router-link></li>
+        <li><router-link to="/rose">玫瑰</router-link></li>
+        <li @click="btnclick">关闭</li>
       </ul>
     </div>
   </div>
 </template>
-
 <script>
-
 export default {
   name: 'line',
   data () {
     return {
-      hide:false
+      hide:false,
+      btnshow:false
     }
   },
   methods:{
     listshow(){
       this.hide=true;
+    },
+    btnclick(){
+      this.hide=false;
     }
   }
 }
@@ -83,6 +85,8 @@ export default {
   text-align: left;
   background: white;
   margin-top: -5px;
+   position: fixed;
+  top: 80px;
 }
 .searchlist li{
   height: 30px;

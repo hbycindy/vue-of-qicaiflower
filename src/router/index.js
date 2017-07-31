@@ -7,6 +7,10 @@ import Mine from '@/components/Mine'
 import Help from '@/components/Help'
 import Headerone from '@/components/Headerone'
 import Headertwo from '@/components/Headertwo'
+import pinkrose from '@/components/pinkrose'
+import nineteen from '@/components/19zhi'
+import baihe from '@/components/baihe'
+import rose from '@/components/rose'
 
 
 Vue.use(Router)
@@ -39,6 +43,26 @@ export default new Router({
       name: 'Help',
       component: Help
     },
-
+    {
+      path: '/pinkrose',
+      name: 'Pink',
+      component: pinkrose
+    },
+    {
+      path: '/nineteen',
+      name: 'Nineteen',
+      component: nineteen
+    },
+    {
+      path: '/baihe',
+      name: 'Baihe',
+      component: baihe
+    },
+    {
+      path: '/rose',
+      name: 'Rose',
+      component: rose
+    },
+    
   ]
 })
