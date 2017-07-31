@@ -1,0 +1,27 @@
+[
+	{
+	  "letter":"A",
+	  "intro":"热卖推荐",
+	  "more":"更多>>"
+	},
+	{
+	  "letter":"B",
+	  "intro":"生日鲜花",
+	  "more":"更多>>"
+	},
+	{
+	  "letter":"C",
+	  "intro":"恋人鲜花",
+	  "more":"更多>>"
+	},
+	{
+	  "letter":"D",
+	  "intro":"精品玫瑰",
+	  "more":"更多>>"
+	},
+	{
+	  "letter":"E",
+	  "intro":"蛋糕推荐",
+	  "more":"更多>>"
+	}
+]
