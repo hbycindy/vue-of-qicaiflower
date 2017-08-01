@@ -1,0 +1,23 @@
+[
+  {
+  	"id":"1",
+  	"img1":"static/class/1.jpg"
+  },
+  {
+  	"id":"2",
+  	"img1":"static/class/2.jpg"
+  },
+  {
+  	"id":"3",
+  	"img1":"static/class/2.jpg"
+  },
+  {
+  	"id":"4",
+  	"img1":"static/class/2.jpg"
+  },
+  {
+  	"id":"5",
+  	"img1":"static/class/2.jpg"
+  }
+
+]

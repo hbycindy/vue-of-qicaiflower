@@ -11,6 +11,7 @@ import pinkrose from '@/components/pinkrose'
 import nineteen from '@/components/19zhi'
 import baihe from '@/components/baihe'
 import rose from '@/components/rose'
+import single from '@/components/single'
 
 
 Vue.use(Router)
@@ -21,7 +22,7 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: Home,
     },
     {
       path: '/classify',
@@ -63,6 +64,11 @@ export default new Router({
       name: 'Rose',
       component: rose
     },
+    {
+      path: '/single/:id',
+      name: 'single',
+      component: single
+    }
     
   ]
 })

@@ -85,8 +85,9 @@ export default {
   text-align: left;
   background: white;
   margin-top: -5px;
-   position: fixed;
+  position: fixed;
   top: 80px;
+  z-index: 100;
 }
 .searchlist li{
   height: 30px;

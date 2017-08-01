@@ -32,11 +32,14 @@
           <li><div>{{item.letter}}</div><p>{{item.intro}}</p></li>
           <li>{{item.more}}</li>
         </ul>
+
+        
+        
         <div >
           <ul class="flowerslist">
             <li>
               <div>
-                <img :src="item.img1" alt="">
+                <router-link to="/single/:'id'"><img :src="item.img1" alt=""></router-link>
                 <p>{{item.p1}}</p>
                 <p>{{item.span1}}</p>
                 <p><span>{{item.price1}}</span><img src="static/home/cartico0.png" alt=""><button>购买</button></p>
@@ -79,8 +82,10 @@
           </ul>
         </div>
       </div>
+      <router-view></router-view>
       <div class="kong"></div>
     </div>
+    <!-- <footer></footer> -->
   </div>
 </template>
 
@@ -88,6 +93,7 @@
 import headerone from './Headerone'
 import searchbar from './line'
 import navbar from './nav'
+// import footer from './footer'
 import axios from 'axios'
 import qs from 'qs'
 export default {
@@ -116,6 +122,7 @@ export default {
     headerone,
     searchbar,
     navbar,
+    // footer
 
   }
 }

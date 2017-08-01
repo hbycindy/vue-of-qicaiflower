@@ -9,6 +9,8 @@
         </div>
    </div>
    <pager></pager>
+
+
   </div>
 </template>
 
@@ -19,21 +21,11 @@ export default {
   name: 'productlist',
   data () {
     return {
-    	currentPage: 1,
-    	lists:{}
+    	lists:{},
+    	// all: 8, //总页数
+     //    cur: 1//当前页码
     }
   },
-  watch: {
-    currentPage: 'requestData'
-  },
-  ready () {
-    this.requestData()
-  },
-  //  methods: {
-  //   requestData () {
-  //     // 在这里使用ajax或者fetch将对应页传过去获取数据即可
-  //   }
-  // },
   created(){
   	var that=this
     axios.get('static/lists.json').then(function(res){
