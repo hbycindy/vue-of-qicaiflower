@@ -5,19 +5,20 @@
     <div class="beforeshop">
       <img src="static/shopping/cart_kong.png" alt="">
       <h4>购物车还是空的，去挑几件中意的商品吧</h4>
-      <button>开始购物</button>
+     <button @click="newPage">开始购物</button>
     </div>
   </div>
 </template>
-
 <script>
 import headerthree from './Headerthree'
 import searchbar from './line'
 export default {
   name: 'shopping',
-  data () {
-    return {
-      msg: ''
+  methods:{
+    newPage(){
+      this.show=false;
+      this.hide=true;
+      this.$router.push('/home')
     }
   },
   components:{
@@ -29,6 +30,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.shopping{
+  background: white;
+}
   .beforeshop{
     width: 100%;
     height: 580px;
@@ -49,5 +53,8 @@ export default {
     outline: none;
     color: white;
     font-size: 14px;
+  }
+  .page-thing{
+
   }
 </style>

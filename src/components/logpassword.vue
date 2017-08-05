@@ -1,23 +1,60 @@
 <template>
   <div class="logpassword">
     <div><button>手机号+密码登录</button><button>手机号+验证码登录</button></div>
-    <div><input type="text" placeholder="请输入手机号"></div>
-    <div><input type="password" placeholder="请输入密码"></div>
+    <div><input type="text" placeholder="请输入手机号" v-model="username"></div>
+    <div><input type="password" placeholder="请输入密码"  v-model="password"></div>
     <div><input type="text" placeholder="请输入验证码">|<button type="button">123</button></div>
     <div><span></span><span>一个月内免登录</span></div>
     <button class="logone">登录</button>
-    <div><a href="">找回密码</a><a href="">免费注册</a></div>
+    <div>
+      <router-link to=""><a href="">找回密码</a></router-link>
+      <router-link to="/register"><a href="">免费注册</a></router-link>
+    </div>
   </div>
 </template>
 
 <script>
+import {setCookie,getCookie} from '../assets/js/cookie.js'
 export default {
   name: 'logpassword',
   data () {
     return {
-      msg: ''
+      msg: '',
+      username: '',
+      password: ''
     }
   },
+   mounted(){
+  /*页面挂载获取cookie，如果存在username的cookie，则跳转到主页，不需登录*/
+    if(getCookie('username')){
+        this.$router.push('/home')
+    }
+  },
+  methods:{
+      register(){
+    if(this.newUsername == "" || this.newPassword == ""){
+        alert("请输入用户名或密码")
+    }else{
+        let data = {'username':this.newUsername,'password':this.newPassword}
+        this.axios.post('http://localhost:6500/uselogin/login',data).then((res)=>{
+            console.log(res)
+            if(res.data == "ok"){
+                this.tishi = "注册成功"
+                this.showTishi = true
+                this.username = ''
+                this.password = ''
+                 /*注册成功之后再跳回登录页*/
+                setTimeout(function(){
+                    this.showRegister = false
+                    this.showLogin = true
+                    this.showTishi = false
+                }.bind(this),1000)
+            }
+        })
+      }
+    }
+  },
+  
   components:{
    
   }

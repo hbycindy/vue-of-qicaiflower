@@ -3,37 +3,43 @@
   	<headertwo></headertwo>	
     <searchbar></searchbar>
     <div class="more">
-      <ul>
+      <ul v-for="item in detail">
         <li>
-          <div><img src="static/class/class_xh.png" alt=""><p>鲜花</p></div>
-          <div><img src="static/class/class_dg.png" alt=""><p>蛋糕</p></div>
-          <div><img src="static/class/class_lmzh.png" alt=""><p>浪漫组合</p></div>
-        </li>
-        <li>
-          <div><img src="static/class/class_hongjiu.png" alt=""><p>红酒</p></div>
-          <div><img src="static/class/class_qkl.png" alt=""><p>巧克力</p></div>
-          <div><img src="static/class/class_kt.png" alt=""><p>卡通花束</p></div>
-        </li>
-        <li>
-          <div><img src="static/class/class_mrwj.png" alt=""><p>毛绒玩具</p></div>
-          <div><img src="static/class/class_syhl.png" alt=""><p>商业花篮</p></div>
-          <div><img src="static/class/class_gl.png" alt=""><p>果篮</p></div>
+          <router-link v-bind:to=item.class><div><img :src="item.icon" alt=""><p>{{item.sort}}</p></div></router-link>
         </li>
       </ul>
     </div>
-    <div class="blank"></div>
   </div>
 </template>
 
 <script>
 import headertwo from './Headertwo'
 import searchbar from './line'
+import axios from 'axios'
+import qs from 'qs'
 export default {
   name: 'classify',
   data () {
     return {
-      msg: ''
+      msg: '',
+      ids:[],
+      paths:[],
+      detail:{},
+      content:[],
+      one:{}
     }
+  },
+  created(){
+    var id=this.$route.params.id;
+    var that=this;
+    axios.get('static/class.json').then(function(res){
+      that.detail=res.data;
+      for(var i=0;i<that.detail.length;i++){
+        that.ids.push(that.detail[i].id);
+        that.content.push(that.detail[i].details);
+        that.one=that.content[i];
+      }
+    })
   },
   components:{
     headertwo,
@@ -48,22 +54,14 @@ export default {
     width: 95%;
     margin-left: 2.5%;
     padding-top: 30px;
-    background: white;
   }
   .more li{
-    width: 100%;
-    height: 130px;
-    display: flex;
-  }
-  .more li div{
     width: 33.33%;
+    height: 120px;
+    float: left;
   }
   .more img{
-    width: 50%;
+    width: 60%;
   }
-  .blank{
-    width: 100%;
-    height: 150px;
-    background: white;
-  }
+
 </style>

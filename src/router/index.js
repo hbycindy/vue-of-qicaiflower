@@ -12,7 +12,10 @@ import nineteen from '@/components/19zhi'
 import baihe from '@/components/baihe'
 import rose from '@/components/rose'
 import single from '@/components/single'
-
+import register from '@/components/register'
+import afterlog from '@/components/afterlog'
+import shoppingcar from '@/components/shoppingcar'
+import classes from '@/components/classes'
 
 Vue.use(Router)
 
@@ -68,6 +71,26 @@ export default new Router({
       path: '/single/:id',
       name: 'single',
       component: single
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      path: '/afterlog',
+      name: 'afterlog',
+      component: afterlog
+    },
+    {
+      path: '/shoppingcar/:id',
+      name: 'shoppingcar',
+      component: shoppingcar
+    },
+    {
+      path: '/classes/:id',
+      name: 'classes',
+      component: classes
     }
     
   ]

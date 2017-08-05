@@ -1,7 +1,7 @@
 <template>
   <div class="line">
-    <div class="searchbar">
-      <div><input type="text" placeholder="红玫瑰" @click="listshow"><img src="static/home/search.png" alt=""></div>
+    <div class="searchbar" >
+      <div><input type="text" placeholder="红玫瑰" @click="listshow" ><img src="static/home/search.png" alt=""></div>
       <button>在线咨询</button>
     </div>
     <div class="searchlist" v-show="hide">
@@ -16,12 +16,20 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+import qs from 'qs'
+// import Vue from 'vue'
+// import Vue2Filters from 'vue2-filters'
+
+
 export default {
   name: 'line',
   data () {
     return {
+
       hide:false,
-      btnshow:false
+      btnshow:false,
+      lists:{}
     }
   },
   methods:{
@@ -31,6 +39,14 @@ export default {
     btnclick(){
       this.hide=false;
     }
+  },
+  created(){
+    var that=this
+    axios.get('static/singlelist.json').then(function(res){
+      that.lists=res.data;
+    }).catch(function (err) {
+      console.log(err);
+    });
   }
 }
 </script>
@@ -47,6 +63,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   background: #eee;
+  z-index: 1000;
 }
 .searchbar div{
   width: 65%;

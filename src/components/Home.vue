@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <headerone></headerone>
-    <!-- <router-view></router-view> -->
     <searchbar></searchbar>
     <navbar></navbar>
     <div class="guide">
@@ -33,19 +32,17 @@
           <li>{{item.more}}</li>
         </ul>
 
-        
-        
-        <div >
-          <ul class="flowerslist">
+        <div v-for="list in lists">
+          <ul class="flowerslist" >
             <li>
               <div>
-                <router-link to="/single/:'id'"><img :src="item.img1" alt=""></router-link>
+                <router-link v-bind:to=list.path>{{list.id}}<img :src="item.img1" alt=""></router-link>
                 <p>{{item.p1}}</p>
                 <p>{{item.span1}}</p>
                 <p><span>{{item.price1}}</span><img src="static/home/cartico0.png" alt=""><button>购买</button></p>
               </div>
               <div>
-                <img :src="item.img2" alt="">
+                <router-link v-bind:to=list.path>{{list.id}}<img :src="item.img2" alt=""></router-link>
                 <p>{{item.p2}}</p>
                 <p>{{item.span2}}</p>
                 <p><span>{{item.price2}}</span><img src="static/home/cartico0.png" alt=""><button>购买</button></p>
@@ -53,13 +50,13 @@
             </li>
            <li>
               <div>
-                <img :src="item.img3" alt="">
+                <router-link v-bind:to=list.path><img :src="item.img3" alt=""></router-link>
                 <p>{{item.p3}}</p>
                 <p>{{item.span3}}</p>
                 <p><span>{{item.price3}}</span><img src="static/home/cartico0.png" alt=""><button>购买</button></p>
               </div>
               <div>
-                <img :src="item.img4" alt="">
+                <router-link v-bind:to=list.path><img :src="item.img4" alt=""></router-link>
                 <p>{{item.p4}}</p>
                 <p>{{item.span4}}</p>
                 <p><span>{{item.price4}}</span><img src="static/home/cartico0.png" alt=""><button>购买</button></p>
@@ -67,13 +64,13 @@
             </li>
             <li>
               <div>
-                <img :src="item.img5" alt="">
+                <router-link v-bind:to=list.path><img :src="item.img5" alt=""></router-link>
                 <p>{{item.p5}}</p>
                 <p>{{item.span5}}</p>
                 <p><span>{{item.price5}}</span><img src="static/home/cartico0.png" alt=""><button>购买</button></p>
               </div>
               <div>
-                <img :src="item.img6" alt="">
+                <router-link v-bind:to=list.path><img :src="item.img6" alt=""></router-link>
                 <p>{{item.p6}}</p>
                 <p>{{item.span6}}</p>
                 <p><span>{{item.price6}}</span><img src="static/home/cartico0.png" alt=""><button>购买</button></p>
@@ -82,10 +79,8 @@
           </ul>
         </div>
       </div>
-      <router-view></router-view>
       <div class="kong"></div>
     </div>
-    <!-- <footer></footer> -->
   </div>
 </template>
 
@@ -105,15 +100,21 @@ export default {
     }
   },
   created(){
-    axios.interceptors.request.use((config) => {
-        config.data = qs.stringify(config.data);
-        return config;
-    }, function(error) {
-        return Promise.reject(error);
-    });
+    // axios.interceptors.request.use((config) => {
+    //     config.data = qs.stringify(config.data);
+    //     return config;
+    // }, function(error) {
+    //     return Promise.reject(error);
+    // });
     var that=this
     axios.get('static/home.json').then(function(res){
       that.seller=res.data;
+    }).catch(function (err) {
+      console.log(err);
+    });
+    axios.get('static/singlelist.json').then(function(res){
+      that.lists=res.data;
+      console.log(that.lists)
     }).catch(function (err) {
       console.log(err);
     });

@@ -5,7 +5,7 @@
       <ul >
       <li><router-link to="/home"><img src="./assets/app/footer01.png" alt=""></router-link></li>
       <li><router-link to="/classify"><img src="./assets/app/footer10.png" alt=""></router-link></li>
-      <li><router-link to="/shopping"><img src="./assets/app/footer20.png" alt=""></router-link></li>
+      <li @click="shopCar"><router-link to=""><img src="./assets/app/footer20.png" alt=""></router-link></li>
       <li><router-link to="/mine"><img src="./assets/app/footer30.png" alt=""></router-link></li>
       <li><router-link to="/help"><img src="./assets/app/footer40.png" alt=""></router-link></li>
     </ul>
@@ -15,13 +15,51 @@
 </template>
 
 <script>
+import axios from 'axios'
+import qs from 'qs'
 export default {
   name: 'app',
   data(){
     return {
-      mesg:"分类"
+      mesg:"分类",
+      lists:[],
+      ids:[],
+      index:"",
+      pa:"",
+      itemid:{},
+      names:[]
     }
-
+  },
+  created(){
+    var that=this;
+    axios.get('static/singlelist.json').then(function(res){
+      that.lists=res.data;
+      console.log(that.lists);
+       for(var i=0;i<that.lists.length;i++){
+        that.ids.push(that.lists[i].pa);
+        that.names.push(that.lists[i].name);
+      }
+       console.log(that.ids)
+    });
+    
+  },
+  methods:{
+    shopCar(){
+    var id=this.$route.params.id;
+    var that=this;
+    let data = {'name':""}
+    axios.get('http://localhost:6500/product',data).then((res)=>{
+          that.itemid=res.data;
+          console.log(that.itemid)
+          // console.log(that.itemid[0].id)
+          if(that.itemid==""){
+              that.$router.push('/shopping');
+            }else if(that.itemid!=""){
+              that.$router.push('/shoppingcar/:id');
+          }
+      })
+     
+    }
   }
 }
 </script>
@@ -47,7 +85,7 @@ ul,a{
 #tabBar{
   width: 100%;
   height: 50px;
-  background: rgba(0, 0, 0, 0.05);
+  background: #ccc;
   position: fixed;
   bottom: 0;
 }

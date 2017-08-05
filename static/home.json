@@ -29,6 +29,7 @@
  	"price6":"￥338"
  },
  {
+ 	"path":"/single/1",
  	"letter":"B",
 	"intro":"生日鲜花",
 	"more":"更多>>",
@@ -58,6 +59,7 @@
  	"price6":"￥235"
  },
  {
+ 	"path":"/single/2",
  	"letter":"C",
 	"intro":"恋人鲜花",
 	"more":"更多>>",
@@ -87,6 +89,7 @@
  	"price6":"￥235"
  },
  {
+ 	"path":"/single/3",
  	"letter":"D",
 	"intro":"精品玫瑰",
 	"more":"更多>>",
