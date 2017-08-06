@@ -35,6 +35,7 @@ export default {
       newUsername: '',
       newPassword: '',
       userlist:{},
+      id:"",
       str:"1c3y"
     }
   },
@@ -72,15 +73,16 @@ export default {
       }else{
             let data = {'username':this.username,'password':this.password}
             /*接口请求*/
-            console.log(data.username)
             var _that=that;
             axios.post('http://localhost:6500/uselogin/login',data).then((res)=>{
-               console.log(data.username)
+              //取回后台登录数据
               _that.userlist=res.data;
-                  setCookie('username',this.username,1000*60)
-                  setTimeout(function(){
-                      _that.$router.push('/afterlog')
-                  }.bind(_that),1000)
+              console.log(_that.userlist)
+              setCookie('username',this.username,1000*60)
+              setCookie('uid',_that.userlist.uid,1000*60)
+              setTimeout(function(){
+                  _that.$router.push('/afterlog')
+              }.bind(_that),1000)
               // }
           }).catch(function (err) {
             _that.msg = "该用户或密码不存在";

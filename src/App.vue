@@ -17,6 +17,7 @@
 <script>
 import axios from 'axios'
 import qs from 'qs'
+import {setCookie,getCookie} from './assets/js/cookie.js'
 export default {
   name: 'app',
   data(){
@@ -27,38 +28,33 @@ export default {
       index:"",
       pa:"",
       itemid:{},
-      names:[]
+      names:[],
+      arr:[]
     }
   },
   created(){
-    var that=this;
-    axios.get('static/singlelist.json').then(function(res){
-      that.lists=res.data;
-      console.log(that.lists);
-       for(var i=0;i<that.lists.length;i++){
-        that.ids.push(that.lists[i].pa);
-        that.names.push(that.lists[i].name);
-      }
-       console.log(that.ids)
-    });
-    
+     this.uid=getCookie("uid") 
+     axios.get("http://localhost:6500/uselogin/"+this.uid).then((res)=>{
+      console.log(res.data)
+          //将获取的ID值输给数组
+          // this.arr=JSON.parse(res.data.product);
+          this.arr=res.data.product
+          console.log(this.arr)
+         
+          // 如果报错打印
+       }).catch(function(err){
+        console.log(err)
+       });
   },
   methods:{
-    shopCar(){
-    var id=this.$route.params.id;
-    var that=this;
-    let data = {'name':""}
-    axios.get('http://localhost:6500/product',data).then((res)=>{
-          that.itemid=res.data;
-          console.log(that.itemid)
-          // console.log(that.itemid[0].id)
-          if(that.itemid==""){
-              that.$router.push('/shopping');
-            }else if(that.itemid!=""){
-              that.$router.push('/shoppingcar/:id');
+    shopCar(index){
+       console.log(this.arr)
+          console.log(this.arr)
+          if(this.arr=="{}"){
+              this.$router.push('/shopping');
+            }else if(this.arr!="{}"){
+              this.$router.push('/shoppingcar/:id');
           }
-      })
-     
     }
   }
 }

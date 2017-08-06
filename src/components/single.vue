@@ -63,12 +63,23 @@ export default {
       items:[],
       itemid:{},
       total:"",
-      num:"0",
-      index:""
+      num:1,
+      index:"",
+      obj:{},
+      obj1:{},
+      arr:[],
+      obj2:{},
+      uid:"",
+      uidd:"",
+      arrdataStr:"",
+      ttt:{}
+
     }
   },
   created(){
     var id=this.$route.params.id;
+    this.uidd=id;
+    // console.log(this.$route.params.id-1)
     axios.interceptors.request.use((config) => {
         config.data = qs.stringify(config.data);
         return config;
@@ -79,50 +90,80 @@ export default {
     //获取本地数据
     axios.get('static/singlelist.json').then(function(res){
       that.singleitems=res.data;
+      that.obj1=that.singleitems[id-1]
+      console.log( that.obj1)
       for(var i=0;i<that.singleitems.length;i++){
         that.ids.push(that.singleitems[i].id);
       }
-      // console.log(id)
        that.index=that.ids.indexOf(id);
+       
+       //获取单个商品信息
        that.contents=that.singleitems[that.index];
-       // console.log(that.contents)
+       console.log(that.contents)
     }).catch(function (err) {
       console.log(err);
     });
   },
   methods:{
     btnCar(){
+      console.log(this.contents)
       this.hide=true;
       this.count++;
-      //声明数据等于获取到的本地数据，再传送到后台
-      let data = {'name':this.contents.name,'price':this.contents.price,'img':this.contents.img1,"num":this.num}
-      this.num++;
-       console.log(data.num)
-      axios.post('http://localhost:6500/product',data).then((res)=>{
-        this.items=res.data;
-        // console.log(this.items)
-        this.itemid=this.items.id
-      })
     },
     toCar(){
-      var that=this;
-      //点击获取后台数据，并通过路由跳转到购物车列表页面
-      let data = {'name':this.contents.name,'price':this.contents.price,'img':this.contents.img1}
-       axios.get('http://localhost:6500/product/',data).then((res)=>{
-        //从后台取回来的数据
-            that.items=res.data;
-            console.log(that.items)
+      console.log(this.obj2)
+      console.log(getCookie("username"))
+       if(getCookie("username")==""){
+        alert("请先登录");
+        //没有登录让页面跳转到登录页面
+        this.$router.push("/mine")
+      }else{
+        this.uid =getCookie("uid");
+
+      console.log(this.uid)
+      console.log(this.uidd)
+       axios.get('http://localhost:6500/uselogin/'+this.uid).then((res)=>{
+        //取回后台登录数据
+       console.log(res.data.product);
+       if(res.data.product==""||!res.data.product){
+              this.addArr()
+              // 将接收的值转成字符串
+              this.arrdataStr=JSON.stringify(this.obj2);
+              
+              // console.log(this.arrdataStr)
+       }else{
+            // 将json字符串转换为对象
+            this.obj2=JSON.parse(res.data.product);
+            console.log(this.obj2);
+            this.addArr()
+             // 将接收的值转成字符串
+            this.arrdataStr=JSON.stringify(this.obj2)   //obj2==arrdata
+      }
+      //修改  如果内容修改了将内容重新传到后台
+          axios.put("http://localhost:6500/uselogin/"+this.uid,{product:this.arrdataStr}).then((res)=>{   
+            // 页面跳转到购物车页面
+            // console.log(res.data.product)
+            this.$router.push("/shoppingcar/:id")
+          });
+      
+          }).catch(function (err) {
+          console.log(err);
           })
-       this.$router.push('/shoppingcar/:id');
+      }
     },
-    // remove(index){
-    //   var that=this;
-    //   let data = {'name':this.contents.name,'price':this.contents.price,'img':this.contents.img1}
-    //   var url='http://localhost:6500/product/'+this.itemid
-    //   axios.delete(url,data).then((res)=>{
-    //           that.items.splice(index, 1);
-    //       })
-    // }
+//获取json文件，选出购物车列表需要的存入obj2
+    addArr(){
+      return this.obj2["id"+this.uidd] = { //商品id做key,下面为传值
+          "id": this.uidd,
+          "num": this.num,
+          "price":this.obj1.price,
+          "name":this.obj1.name,
+          "img":this.obj1.img1
+
+        };
+    }
+
+
   },
   components:{
     headertwo,
