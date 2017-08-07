@@ -5,7 +5,7 @@
     <navbar></navbar>
     <div class="guide">
       <ul>
-        <li><img src="static/home/flower.png" alt="">
+        <li @click="flower"><img src="static/home/flower.png" alt="">
             <p>鲜花</p>
           </img></li>
         <li><img src="static/home/cake.png" alt="">
@@ -14,7 +14,7 @@
         <li><img src="static/home/lm11.png" alt="">
             <p>浪漫组合</p>
           </img></li>
-        <li><img src="static/home/more.png" alt="">
+        <li  @click="more"><img src="static/home/more.png" alt="">
             <p>更多</p>
           </img></li>
       </ul>
@@ -118,6 +118,14 @@ export default {
     }).catch(function (err) {
       console.log(err);
     });
+  },
+  methods:{
+    flower(){
+      // this.$router.push('/classes/:1')
+    },
+    more(){
+      this.$router.push('/classify')
+    }
   },
   components:{
     headerone,

@@ -30,8 +30,11 @@ export default {
       newPassword:'',
       list:{},
       testword:"",
-      str:"12ft"
+      str:""
     }
+  },
+  created(){
+    this.test()
   },
    methods:{
       back(){

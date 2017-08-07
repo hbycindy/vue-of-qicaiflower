@@ -36,11 +36,9 @@ export default {
      this.uid=getCookie("uid") 
      axios.get("http://localhost:6500/uselogin/"+this.uid).then((res)=>{
       console.log(res.data)
-          //将获取的ID值输给数组
-          // this.arr=JSON.parse(res.data.product);
-          this.arr=res.data.product
-          console.log(this.arr)
-         
+          //将获取的产品信息值输给数组
+          this.arr=JSON.parse(res.data.product);    
+          console.log(this.arr)   
           // 如果报错打印
        }).catch(function(err){
         console.log(err)
@@ -50,9 +48,10 @@ export default {
     shopCar(index){
        console.log(this.arr)
           console.log(this.arr)
-          if(this.arr=="{}"){
+          if(this.arr==""){
               this.$router.push('/shopping');
-            }else if(this.arr!="{}"){
+            }else if(this.arr!=""){
+              console.log(111111)
               this.$router.push('/shoppingcar/:id');
           }
     }

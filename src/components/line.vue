@@ -18,15 +18,11 @@
 <script>
 import axios from 'axios'
 import qs from 'qs'
-// import Vue from 'vue'
-// import Vue2Filters from 'vue2-filters'
-
 
 export default {
   name: 'line',
   data () {
     return {
-
       hide:false,
       btnshow:false,
       lists:{}

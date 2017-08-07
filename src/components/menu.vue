@@ -1,15 +1,15 @@
 <template>
   <div class="menu">
     <div class="block" @click="outblock">
-        <div><button>登录</button><p>登录后享受更多优惠</p></div>
+        <div><button @click="logBtn">登录</button><p>登录后享受更多优惠</p></div>
         <ul>
-          <li><img src="static/class/1.png" alt="">商品分类</li>
+          <li @click="proCl"><img src="static/class/1.png" alt="">商品分类</li>
           <li><img src="static/class/2.png" alt="">订单查询</li>
           <li><img src="static/class/3.png" alt="">订单付款</li>
           <li><img src="static/class/4.png" alt="">常见问题</li>
           <li><img src="static/class/5.png" alt="">最新优惠</li>
-          <li><img src="static/class/6.png" alt="">我的七彩</li>
-          <li><img src="static/class/7.png" alt="">回到首页</li>
+          <li @click="mine"><img src="static/class/6.png" alt="">我的七彩</li>
+          <li @click="home"><img src="static/class/7.png" alt="">回到首页</li>
         </ul>
     </div>
   </div>
@@ -28,6 +28,18 @@ export default {
       e.stopPropagation();
       e.preventDefault();
 
+    },
+    logBtn(){
+      this.$router.push("/mine");
+    },
+    proCl(){
+      this.$router.push("/classify");
+    },
+    mine(){
+      this.$router.push('/afterlog')
+    },
+    home(){
+      this.$router.push('/home')
     }
   }
 }

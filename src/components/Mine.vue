@@ -36,8 +36,11 @@ export default {
       newPassword: '',
       userlist:{},
       id:"",
-      str:"1c3y"
+      str:""
     }
+  },
+  created(){
+    this.test()
   },
   methods:{
     closeBoard(){
